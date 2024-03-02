@@ -54,7 +54,7 @@ const start = async () => {
             fastify.log.error(err)
             process.exit(1)
         }
-        fastify.log.info(`server listening on ${fastify.server.address().port}`)
+        fastify.log.info(`server listening on http://localhost:${fastify.server.address().port}`)
     })
 }
 start()
