@@ -17,24 +17,35 @@ const f = createInstance({
 });
 
 // Declare a route
-/*
-    fastify.get('/', async (request, reply) => {
-        const featureKey = "my_feature";
-        const context = { userId: "123", country: "nl" };
+fastify.get('/', async (request, reply) => {
+    const featureKey = "my_feature";
+    const context = { userId: "123", country: "nl" };
 
-        const isEnabled = f.isEnabled(featureKey, context);
+    const isEnabled = f.isEnabled(featureKey, context);
 
-        if (isEnabled) {
-            reply.send("Hello World!");
-        } else {
-            reply.send("Not enabled yet!");
-        }
-    })
-*/
+    if (isEnabled) {
+        reply.send("Hello World!");
+    } else {
+        reply.send("Not enabled yet!");
+    }
+})
 
-// with middleware
+// with decorator
+fastify.decorateRequest('f', f);
 
+fastify.get("/my-route", async (request, reply) => {
+    const featureKey = "my_feature";
+    const context = { userId: "123", country: "nl" };
 
+    const isEnabled = f.isEnabled(featureKey, context);
+  
+    if (isEnabled) {
+      return "Hello World!";
+    } else {
+      return "Not enabled yet!";
+    }
+  });
+  
 
 // Run the server!
 const start = async () => {
