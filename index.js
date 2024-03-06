@@ -37,7 +37,7 @@ fastify.get("/my-route", async (request, reply) => {
     const featureKey = "my_feature";
     const context = { userId: "123", country: "nl" };
 
-    const isEnabled = f.isEnabled(featureKey, context);
+    const isEnabled = request.f.isEnabled(featureKey, context);
 
     if (isEnabled) {
         reply.send("Hello World!");
